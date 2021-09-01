@@ -1,0 +1,17 @@
+{
+  "name": "anexos-app",
+  "version": "1.0.0",
+  "description": "Project to upload annexes to patients",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mechavez",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-offline": "^8.0.0"
+  },
+  "dependencies": {
+    "query-string": "^7.0.1"
+  }
+}

@@ -1,0 +1,54 @@
+# service name
+service: anexos-app
+
+# version
+frameworkVersion: '2'
+
+# setting provider
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  region: us-east-2
+
+# plugins
+plugins:
+  - serverless-offline
+
+# functions
+functions:
+  fnGetPatient: # Function fnGetPatient
+    handler: handler.getPatient # Reference to file handler.js & exported function 'getPatient'
+    events: # All events associated with this function
+      - http:
+          path: patients
+          method: get
+  
+  fnGetPatientById: # Function fnGetPatientById
+    handler: handler.getPatientById # Reference to file handler.js & exported function 'getPatientById'
+    events: # All events associated with this function       
+      - http:
+          path: patients/{id}
+          method: get
+
+  fnAddPatient: # Function fnAddPatient
+    handler: handler.patientAdd # Reference to file handler.js & exported function 'patientAdd'
+    events: # All events associated with this function
+      - http:
+          path: patients
+          method: post
+
+  fnUpdateAnnexed: # Function fnUpdateAnnexed
+    handler: handler.updateAnnexed # Reference to file handler.js & exported function 'updateAnnexed'
+    events: # All events associated with this function
+      - http:
+          path: patients/annexed/{idAnnexed}
+          method: patch
+  
+  fnDeleteAnnexed: # Function fnDeleteAnnexed
+    handler: handler.deleteAnnexed # Reference to file handler.js & exported function 'deleteAnnexed'
+    events: # All events associated with this function
+      - http:
+          path: patients/annexed/{idAnnexed}
+          method: delete
+      
