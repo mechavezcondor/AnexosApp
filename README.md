@@ -55,6 +55,10 @@ Project is created with:
 
 ![The Architecture](/images/architecture.png "Architecture")
 
+## Structure
+
+![The structure](/images/structure.png "Architecture")
+
 ### Data model
 
 ```javascript
@@ -69,39 +73,28 @@ const patientSchema = new Schema({
         required: true
     },
     age: {
-        type: Int,
+        type: Number,
         required: false
     },
-    urlAnnexed: {
-        type: Schema.ObjectId,
-        ref: 'Annexed'
-    }
+    annexed: [{
+        location: {
+            type: String,
+            required: true
+        },
+        Key: {
+            type: String,
+        }
+    }]
 })
 
 // Annexed Schema
 const annexedSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    originalName: {
+    location: {
         type: String,
         required: true
     },
     Key: {
         type: String,
-        required: true
-    },
-    mimetype: {
-        type: String,
-        required: true
-    },
-    size: {
-        type: Number
-    },
-    location: {
-        type: String
     }
 })
 ```

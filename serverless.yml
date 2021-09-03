@@ -32,7 +32,7 @@ functions:
           method: get
 
   fnAddPatient: # Function fnAddPatient
-    handler: handler.patientAdd # Reference to file handler.js & exported function 'patientAdd'
+    handler: handler.addPatient # Reference to file handler.js & exported function 'addPatient'
     events: # All events associated with this function
       - http:
           path: patients
@@ -42,13 +42,13 @@ functions:
     handler: handler.updateAnnexed # Reference to file handler.js & exported function 'updateAnnexed'
     events: # All events associated with this function
       - http:
-          path: patients/annexed/{idAnnexed}
+          path: patients/annexed/{id}
           method: patch
   
   fnDeleteAnnexed: # Function fnDeleteAnnexed
     handler: handler.deleteAnnexed # Reference to file handler.js & exported function 'deleteAnnexed'
     events: # All events associated with this function
       - http:
-          path: patients/annexed/{idAnnexed}
+          path: patients/annexed/{id}
           method: delete
       
