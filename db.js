@@ -1,17 +1,13 @@
-const db = require('mongoose');
+const settings = require('./utils/settings');
+const mongoDB = require("@condor-labs/mongodb")(settings.mongo);
 
-db.Promise = global.Promise;
+const connect = () => {
+    mongoDB.getClient()
+        .then(() => console.log('connected @condor/mongo'))
+        .catch(() => console.log('not connectec'));
+};
 
-const connect = async (url) => {
-    try {
-        await db.connect(url, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        console.log('DB is connected!!');
-    } catch (error) {
-        console.log(`DB error ${error}`);
-    }
-}
-
-module.exports = connect;
+module.exports = {
+    mongoDB,
+    connect
+};

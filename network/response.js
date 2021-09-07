@@ -1,3 +1,5 @@
+const logger = require('@condor-labs/logger');
+
 exports.success = (status, message, data) => {
     return {
         statusCode: status,
@@ -13,14 +15,14 @@ exports.success = (status, message, data) => {
 };
 
 exports.error = (status, message, details) => {
-    console.log(`[response error] ${details}`);
+    logger.warning(`[response error] ${details}`);
 
     return {
         statusCode: status,
         body: JSON.stringify(
             {
                 message: message,
-                input: [],
+                input: `[response error] ${details}`,
             },
             null,
             2

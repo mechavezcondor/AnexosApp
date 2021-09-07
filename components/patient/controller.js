@@ -1,57 +1,52 @@
 const { add, list, get, update, remove } = require("./store");
 
-const listPatient = () => {
-    return new Promise((res, rej) => {
-        const result = list();
-        res(result);
-    });
+const listPatient = async () => {
+    const res = await list();
+    if (!res) {
+        throw 'List Patients not Found';
+    }
+    return res;
+};
+
+const getPatientId = async (id) => {
+    if (!id) {
+        throw '[patientController] incorrect id';
+    }
+    const res = await get(id);
+    if (!res) {
+        throw 'Patient not Found';
+    }
+    return res;
+};
+
+const createPatient = async (name, lastName, age) => {
+    if (!name, !lastName) {
+        throw '[patientController] Name or lastName is required';
+    }
+
+    const fullPatient = {
+        name,
+        lastName,
+        age
+    };
+
+    return await add(fullPatient);
+};
+
+const updatePatient = async (id, annexed, delAnnexed) => {
+    if (!id || !annexed) {
+        throw '[PatientController] incorrect id or annexed';
+    }
+    const response = await update(id, annexed, delAnnexed);
+    return response
 }
 
-const getPatientId = (id) => {
-    return new Promise((res, rej) => {
-        if (!id) {
-            return rej('[patientController] incorrect id');
-        }
-        const result = get(id);
-        res(result);
-    });
-}
-
-const createPatient = (name, lastName, age) => {
-    return new Promise((res, rej) => {
-        if (!name, !lastName) {
-            return rej('[patientController] incorrect name or lastName');
-        }
-
-        const fullPatient = {
-            name,
-            lastName,
-            age
-        };
-        const result = add(fullPatient);
-        res(result);
-    });
-}
-
-const updatePatient = (id, annexed, delAnnexed) => {
-    return new Promise(async (res, rej) => {
-        if (!id || !annexed) {
-            return rej('[PatientController] incorrect id or annexed');
-        }
-        const result = await update(id, annexed, delAnnexed)
-        res(result);
-    });
-}
-
-const removeAnnexed = (id) => {
-    return new Promise(async (res, rej) => {
-        if (!id) {
-            return rej('[PatientController] incorrect id');
-        }
-        const result = await remove(id)
-        res(result);
-    });
-}
+const removeAnnexed = async (id) => {
+    if (!id) {
+        throw '[PatientController] incorrect id';
+    }
+    return await remove(id);
+};
 
 module.exports = {
     listPatient,
@@ -59,4 +54,4 @@ module.exports = {
     getPatientId,
     updatePatient,
     removeAnnexed
-}
+};

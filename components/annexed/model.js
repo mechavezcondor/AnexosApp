@@ -1,8 +1,6 @@
-const mongoose = require('mongoose');
+const { mongoDB } = require('../../db');
 
-const Schema = mongoose.Schema;
-
-const annexedSchema = new Schema({
+const annexedSchema = mongoDB.mongoose.Schema({
     location: {
         type: String,
         required: true
@@ -12,4 +10,4 @@ const annexedSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Annexed', annexedSchema);
+module.exports = mongoDB.mongoose.model('Annexed', annexedSchema);

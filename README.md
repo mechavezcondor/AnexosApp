@@ -99,6 +99,16 @@ const annexedSchema = new Schema({
 })
 ```
 
+## EndPoints
+```javascript
+endpoints:
+  GET - https://by1z2co6p8.execute-api.us-east-2.amazonaws.com/dev/patients
+  GET - https://by1z2co6p8.execute-api.us-east-2.amazonaws.com/dev/patients/{id}
+  POST - https://by1z2co6p8.execute-api.us-east-2.amazonaws.com/dev/patients
+  PATCH - https://by1z2co6p8.execute-api.us-east-2.amazonaws.com/dev/patients/annexed/{id}
+  DELETE - https://by1z2co6p8.execute-api.us-east-2.amazonaws.com/dev/patients/annexed/{id}
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

@@ -1,8 +1,6 @@
-const mongoose = require('mongoose');
+const { mongoDB } = require('../../db');
 
-const Schema = mongoose.Schema;
-
-const patientSchema = new Schema({
+const patientSchema = mongoDB.mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -26,4 +24,4 @@ const patientSchema = new Schema({
     }]
 });
 
-module.exports = mongoose.model('Patient', patientSchema);
+module.exports = mongoDB.mongoose.model('Patient', patientSchema);

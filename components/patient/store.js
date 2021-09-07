@@ -1,15 +1,11 @@
 const Model = require('./model');
 
-const getPatients = () => {
-    return new Promise((res, rej) => {
-        res(Model.find());
-    });
+const getPatients = async () => {
+    return await Model.find();
 };
 
-const getPatient = (id) => {
-    return new Promise((res, rej) => {
-        res(Model.findById(id));
-    });
+const getPatient = async (id) => {
+    return await Model.findById(id);
 };
 
 const addPatient = async (patient) => {
@@ -18,21 +14,24 @@ const addPatient = async (patient) => {
 };
 
 const updatePatient = async (id, annexed, delAnnexed = false) => {
-    const foundPatient = await Model.findById(id);
-    if (delAnnexed) {
-        return await Model.updateOne({ _id: id }, { $pull: { annexed: { _id: annexed._id } } });
-    }
+    try {
+        const foundPatient = await Model.findById(id);
 
-    if (foundPatient) {
+        if (delAnnexed) {
+            return await Model.updateOne({ _id: id }, { $pull: { annexed: { _id: annexed._id } } });
+        }
+
         foundPatient.annexed.push(annexed);
-        return await foundPatient.save();
+        const response = await foundPatient.save();
+        return response;
+    } catch (error) {
+        throw error;
     }
-    return 'Patient notFound';
-}
+};
 
 const removeAnnexed = async (id) => {
     return await Model.findByIdAndDelete(id);
-}
+};
 
 module.exports = {
     add: addPatient,
